@@ -1,5 +1,5 @@
 import express from "express";
-import cookieparse from "cookie-parser";
+import cookieParser from "cookie-parser"; // Corrected 'cookieparse' to 'cookie-parser'
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -7,19 +7,14 @@ import colors from "colors";
 import authRoutes from "./Routes/auth.js";
 import userRoutes from "./Routes/user.js";
 import doctorRoutes from "./Routes/doctor.js";
-import reviewRoutes from "./Routes/review.js"; // Update to reviewRoutes
+import reviewRoutes from "./Routes/review.js"; 
 import bookingRoutes from "./Routes/booking.js";
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-const express = require('express');
-const cors = require('cors');
-const app = express();
-
-
-// CORS options
 const corsOptions = {
   origin: ["https://medicare-bookings.vercel.app"],
   methods: ['POST', 'GET', 'PUT', 'DELETE'],
@@ -27,7 +22,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); 
 
 app.get("/", (req, res) => {
   res.send("Api is working");
@@ -37,7 +31,10 @@ app.get("/", (req, res) => {
 mongoose.set("strictQuery", false);
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URL);
+    const conn = await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log(`Connected to mongoDB Database`.bgMagenta.white);
   } catch (error) {
     console.log(`Mongo Db error ${error}`.bgRed.white);
@@ -47,17 +44,16 @@ const connectDB = async () => {
 
 // middleware
 app.use(express.json());
-app.use(cookieparse());
-app.use(cors(corsOptions));
+app.use(cookieParser());
 
 // Routers
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/doctors", doctorRoutes);
-app.use("/api/v1/reviews", reviewRoutes); // Use reviewRoutes
+app.use("/api/v1/reviews", reviewRoutes); 
 app.use("/api/v1/bookings", bookingRoutes);
 
 app.listen(port, () => {
   connectDB();
-  console.log(`Server is working ${port}`.bgCyan.white);
+  console.log(`Server is working on port ${port}`.bgCyan.white);
 });
