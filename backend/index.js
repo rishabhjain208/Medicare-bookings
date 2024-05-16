@@ -14,12 +14,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
 const corsOptions = {
-  origin: "https://medicare-booking-seven.vercel.app/",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
+  origin: 'https://medicare-booking-seven.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
