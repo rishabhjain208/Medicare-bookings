@@ -23,7 +23,7 @@ const corsOptions = {
 
 // CORS options
 const corsOptions = {
-  // origin: "https://medicare-booking-ten.vercel.app",
+  origin: "https://medicare-booking-topaz.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   preflightContinue: false,
