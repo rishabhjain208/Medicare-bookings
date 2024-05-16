@@ -17,17 +17,13 @@ const port = process.env.PORT || 8000;
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const corsOptions = {
-  origin: true,
-};
+
 
 // CORS options
 const corsOptions = {
-  origin: "https://medicare-booking-topaz.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  origin: ["https://medicare-bookings.vercel.app"],
+  methods: ['POST', 'GET', 'PUT', 'DELETE'],
   credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
