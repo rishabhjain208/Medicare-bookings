@@ -36,11 +36,5 @@ Medicare is a Doctor Appointment Booking Website that goes beyond simple appoint
 - Context API
 - React Router v6
 
-## Getting Started
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your_username/medicare-appointment-booking.git
-   cd medicare-appointment-booking
 
 
