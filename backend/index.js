@@ -19,10 +19,11 @@ const cors = require('cors');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://medicare-booking-seven.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: "https://medicare-booking-ten.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
   preflightContinue: false,
-  optionsSuccessStatus: 204,
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
