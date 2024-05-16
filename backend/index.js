@@ -22,16 +22,16 @@ const corsOptions = {
 };
 
 // CORS options
-// const corsOptions = {
-//   origin: "https://medicare-booking-ten.vercel.app",
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   credentials: true,
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204
-// };
+const corsOptions = {
+  // origin: "https://medicare-booking-ten.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
 
-// app.use(cors(corsOptions));
-// app.options('*', cors(corsOptions)); 
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); 
 
 app.get("/", (req, res) => {
   res.send("Api is working");
