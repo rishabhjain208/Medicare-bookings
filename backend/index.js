@@ -15,16 +15,12 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: true,
+  origin: ["https://medicare-bookings.vercel.app"],
+  methods: ['POST', 'GET', 'PUT', 'DELETE'],
+  credentials: true,
 };
 
-app.use(cors(
-  {
-    origin:["https://medicare-bookings.vercel.app/],
-    methods:['POST,GET,PUT,DELETE],
-    credentials: true        
-  }
-))
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Api is working");
