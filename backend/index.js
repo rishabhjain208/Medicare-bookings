@@ -16,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: [""],
+  origin: ["https://medicare-bookings.vercel.app"],
   methods: ['POST', 'GET', 'PUT', 'DELETE'],
   credentials: true,
 };
