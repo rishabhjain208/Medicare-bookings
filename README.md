@@ -1,5 +1,5 @@
 # Medicare Appointment Booking Website
-## live - https://medicare-booking-app.vercel.app
+## live - https://medicare-doctor.vercel.app/
 Medicare is a Doctor Appointment Booking Website that goes beyond simple appointment scheduling by providing additional features and functionalities. The application is built using JavaScript, React.js, TailwindCSS, Context API, React Router, Node.js, Express.js, MongoDB, Mongoose, JWT, Stripe payment, and Cloudinary. The user interface is designed using TailwindCSS, and the application provides a seamless and fast experience for users on both desktop and mobile devices. With Medicare, users can easily and securely book their appointments essentials from the comfort of their own homes.
 
 ## Features
