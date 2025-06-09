@@ -3,8 +3,15 @@ import convertTime from "../../utils/convertTime";
 import { toast } from "react-toastify";
 import { BASE_URL, token } from "../../config";
 import HashLoader from "react-spinners/HashLoader";
+import {FaArrowRight} from "react-icons/fa";
 const SildePanel = ({ doctorId, ticketPrice, timeSlots }) => {
   const [loading, setLoading] = useState(false);
+  const [openIndex, setOpenIndex] = useState(null);
+  const [selectedSlot, setSelectedSlot]= useState(1);
+  const toggleSlot = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   const bookingHandler = async () => {
     setLoading(true);
     try {
@@ -49,7 +56,7 @@ const SildePanel = ({ doctorId, ticketPrice, timeSlots }) => {
             <p className="text__para font-semibold mt-0 text-headingColor">
               Available Time Slots:
             </p>
-            <ul className="mt-3">
+            {/* <ul className="mt-3">
               {timeSlots?.map((item, index) => (
                 <li key={index} className="flex items-center justify-between">
                   <p className="text-[15px] leading-8 text-textColor font-semibold">
@@ -61,7 +68,97 @@ const SildePanel = ({ doctorId, ticketPrice, timeSlots }) => {
                   </p>
                 </li>
               ))}
-            </ul>
+            </ul> */}
+
+            <ul className="mt-3">
+      {timeSlots?.map((item, index) => (
+        <li key={index} className="flex flex-col">
+          <div className="flex items-center justify-between cursor-pointer" onClick={() => toggleSlot(index)}>
+            <p className="text-[15px] leading-8 text-textColor font-semibold">
+              {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
+            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-[15px] leading-8 text-textColor font-semibold">
+                {convertTime(item.startingTime)} - {convertTime(item.endingTime)}
+              </p>
+              {openIndex === index ? (
+                <FaArrowRight className="w-4 h-4 text-gray-600" />
+              ) : (
+                <FaArrowRight className="w-4 h-4 text-gray-600" />
+              )}
+            </div>
+          </div>
+          {openIndex === index && (
+            <ul className="text-[15px] leading-8 text-textColor">
+              <li>
+            <input
+            type="radio"
+            id={1}
+            name="timeSlot"
+            value={1}
+            checked={selectedSlot === 1}
+            onChange={() => setSelectedSlot(1)}
+            className="w-4 h-4 accent-blue-500"
+          />
+          <span> 10:00AM</span>
+          </li>
+           <li>
+            <input
+            type="radio"
+            id={2}
+            name="timeSlot"
+            value={"11:00 AM"}
+            checked={selectedSlot === 2}
+            onChange={() => setSelectedSlot(2)}
+            className="w-4 h-4 accent-blue-500"
+          />
+           <span> 11:00AM</span>
+          </li>
+           <li>
+            <input
+            type="radio"
+            id={3}
+            name="timeSlot"
+            value={"12:00 PM"}
+            checked={selectedSlot ===3}
+            onChange={() => setSelectedSlot(3)}
+            className="w-4 h-4 accent-blue-500"
+          />
+           <span> 12:00PM</span>
+          </li>
+          <li>
+            <input
+            type="radio"
+            id={1}
+            name="timeSlot"
+            value={"01:00 PM"}
+            checked={selectedSlot === 4}
+            onChange={() => setSelectedSlot(4)}
+            className="w-4 h-4 accent-blue-500"
+          />
+           <span> 01:00PM</span>
+          </li>
+          <li>
+            <input
+            type="radio"
+            id={1}
+            name="timeSlot"
+            value={"03:00 PM"}
+            checked={selectedSlot === 5}
+            onChange={() => setSelectedSlot(5)}
+            className="w-4 h-4 accent-blue-500"
+          />
+           <span> 03:00PM</span>
+          </li>
+        
+          </ul>
+          )}
+
+      </li>
+      ))}
+    </ul>
+  
+          
           </div>
           <div>
             <button
