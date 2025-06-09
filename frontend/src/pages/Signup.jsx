@@ -56,8 +56,13 @@ const Signup = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     setLoading(true);
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+      if (!emailPattern.test(formData.email)) {
+        toast.error("Please enter a valid Gmail address");
+        setLoading(false);
+        return;
+      }
     try {
       const res = await fetch(`${BASE_URL}/auth/register`, {
         method: "post",
