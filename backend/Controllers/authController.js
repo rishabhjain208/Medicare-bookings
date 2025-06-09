@@ -3,6 +3,8 @@ import Users from "../modules/UserSchema.js";
 import Jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
+import { promises as dns } from 'dns';
+
 const generateToken = (user) => {
   return Jwt.sign(
     { id: user._id, role: user.role },
@@ -24,11 +26,26 @@ export const register = async (req, res) => {
     } else if (role === "doctor") {
       user = await Doctor.findOne({ email });
     }
-    // check if user exists
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+  return res.status(400).json({ message: "Invalid email address" });
+}
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
-    // hash password
+  try{ 
+  const emailDomain = email.split('@')[1];
+  const records = await dns.resolveMx(emailDomain);
+
+  if (!records || records.length === 0) {
+    console.log("hello")
+    return res.status(400).json({ message: "Email domain does not exist" });
+  }}
+  catch (err){
+        return res.status(400).json({ message: "Email domain does not exist" });
+
+  }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -52,7 +69,6 @@ export const register = async (req, res) => {
         role,
       });
     } else {
-      // Handle invalid role here, if needed
       return res.status(400).json({ message: "Invalid role" });
     }
 
